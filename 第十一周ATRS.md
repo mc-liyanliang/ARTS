@@ -6,6 +6,7 @@ algorithm
 * 哈哈<br>
 * 哈哈
 * 哈哈<br>
+![](https://github.com/mc-liyanliang/ARTS/blob/master/image/02.%E9%93%BE%E8%A1%A8-%E5%88%A0%E9%99%A4%E8%8A%82%E7%82%B9.jpg)<br>
 #本周的<br>
   `不管`怎么样
 学习的重点是<br>
