@@ -1,0 +1,114 @@
+2018.10.20~2018.10.21<br>
+<br>
+每周完成一个ARTS：<br>
+每周至少做一个LeetCode的算法题，阅读和点评至少一篇英文技术文章，学习至少一个技术技巧，分享一篇有观点和思考的技术文章<br>
+（也就是algorithm ，preview ，tip，share 简称ARTS）需要坚持至少一年。<br> 
+
+一、algorithm：
+====
+
+*[leetcode]530. 二叉搜索树的最小绝对差*<br>
+
+解答：  
+`cpp
+class Solution {
+public:
+    int getMinimumDifference(TreeNode* root) {
+        std::vector<int> sorted;
+        inorder(root, sorted);
+        int min_diff = sorted.back();
+        for (int i = 1; i < sorted.size(); ++i)
+            min_diff = min(min_diff, sorted[i] - sorted[i - 1]);
+        return min_diff;
+    }
+private:
+    void inorder(TreeNode* root, std::vector<int>& sorted) {
+        if (!root) return;
+        inorder(root->left, sorted);
+        sorted.push_back(root->val);
+        inorder(root->right, sorted);
+    }
+};
+```
+<br>
+二、Review
+----
+[Pointers and Const-Correctness](https://www.cprogramming.com/reference/pointers/const_pointers.html)
+分析了C++中常量指针和指针常量。<br>
+三、Tip
+---
+　　本应用程序示范了怎样对选择集使用ads_matrix数据类型的矩阵和怎样使用对ads_matri x数据类型进行操作的选择集函数acedXformSS().  
+  本程序示例了实体的比例变换。
+　　acrxEntryPoint.cpp命令函数的实现:<br>
+```cpp
+	static void aaaMyGroupMyCommand () {
+		acutPrintf(_T("\n进入aaaMyGroupMyCommand函数."));
+		ads_matrix xform;  //转换矩阵
+		ads_name ssGrp;  //the entities that make up transform SS
+		int rc; //返回码
+		ads_real sf;  //Scale Factor
+
+		//Select the entitise
+		acedPrompt(_T("\nSelect entities to scale (transform)"));
+		rc = acedSSGet(NULL, NULL, NULL, NULL, ssGrp);
+		if (rc != RTNORM)
+		{
+			acutPrintf(_T("\nEmpty or invalid selection set."));
+			return;
+		}
+
+		//input the scale factor
+		acedInitGet(RSG_NONULL + RSG_NONEG + RSG_NOZERO, NULL);
+		acedGetReal(_T("\nTransformation Scale factor:"), &sf);
+
+		//initialise the matrix
+		COtherUtil::ident_init(xform);
+
+		//Apply the scaling factor to the matrix
+		for (int i = 0; i <= 3; i++)
+		{
+			xform[i][i] = sf;
+		}
+
+		rc = acedXformSS(ssGrp, xform);
+		if (rc != RTNORM)
+		{
+			acutPrintf(_T("\nFailed in transformation of selection set."));
+		}
+		acedSSFree(ssGrp);
+
+		acutPrintf(_T("\n完成aaaMyGroupMyCommand函数."));
+	}	
+```
+<br>
+其中，<br>
+ident_init(ads_matrix id)函数的实现：<br>
+	
+```cpp	
+void COtherUtil::ident_init(ads_matrix id)
+{
+	acutPrintf(_T("\n进入ident_init函数."));
+	int i, j;
+
+	for ( i = 0; i <= 3; i++)
+	{
+		for (j = 0; j <= 3; j++)
+		{
+			id[i][j] = 0.0;
+		}
+	}
+
+	for (int i = 0; i <= 3; i++)
+	{
+		id[i][i] = 1.0;
+	}
+	acutPrintf(_T("\n完成ident_init函数."));
+}
+```
+效果：<br>
+![](http://ww1.sinaimg.cn/large/005SvaFtgy1fwuj87d9jmg30pf0qiaod.gif)
+<br>
+四、share
+----
+[C++临时对象那些事儿](https://blog.csdn.net/waljl/article/details/51144351)
+<br>
